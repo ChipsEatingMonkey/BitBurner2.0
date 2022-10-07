@@ -1,0 +1,1 @@
+BitBurner2.0 scripts pushing to game with https://github.com/bitburner-official/typescript-template

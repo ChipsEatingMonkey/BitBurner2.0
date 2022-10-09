@@ -2,15 +2,15 @@ import { getServerInfo } from "./lib/lib";
 /** @param {import(".").NS } ns **/
 export async function main(ns) {
 
-    if (ns.args.length < 3){
+    if (ns.args.length < 1){
         ns.tprint(" no Arguments given. Format: \nrun viewer.js hostName targetName pid");
         return;
     }
-    let host = ns.args[0];
-    let target = ns.args[1];
+    let host = ns.args[1];
+    let target = ns.args[0];
     let pid = ns.args[2];
     ns.disableLog("ALL");
-    ns.resizeTail(400,300);
+    ns.resizeTail(600,300);
     while (true){
         ns.clearLog();
         let logsize = 20;

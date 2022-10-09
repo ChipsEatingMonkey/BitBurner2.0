@@ -13,13 +13,15 @@ export async function main(ns) {
     let securityThresh = ns.getServerMinSecurityLevel(target) + 5;
     while(true) {
         if (ns.getServerSecurityLevel(target) > securityThresh) {
-            await ns.weaken(target, {threads: freeThreads });
+            ns.exec("/lib/weaken.js",ns.getHostname(),freeThreads,target);
+            await ns.sleep(1000+Math.ceil(ns.getWeakenTime(target)));
         } else if (ns.getServerMoneyAvailable(target) < moneyThresh) {
-            await ns.grow(target, {threads: freeThreads });
+            ns.exec("/lib/grow.js",ns.getHostname(),freeThreads,target);
+            await ns.sleep(1000+Math.ceil(ns.getGrowTime(target)));
         } else {
-            await ns.hack(target, {threads: Math.min(freeThreads,50) });
+            ns.exec("/lib/hack.js",ns.getHostname(),Math.min(freeThreads,50),target);
+            await ns.sleep(1000+Math.ceil(ns.getHackTime(target)));
             }
         }
     }
 }
-
